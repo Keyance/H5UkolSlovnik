@@ -25,10 +25,10 @@ if (radky.Length > 0)
 
     foreach (string par in pary)
     {
-        string  [] jednotlive = par.Split("=");
-        if (jednotlive[0] != null && jednotlive[1] != null)
-        {
-            slovnik.Add(jednotlive[0], jednotlive[1]); //index out of range???
+        if (par != "")
+        { 
+            string[] jednotlive = par.Split("="); 
+            slovnik.Add(jednotlive[0], jednotlive[1]);
         }
     }
 }
@@ -51,16 +51,16 @@ while (!jeKonec)
 
     int volba = Convert.ToInt32(Console.ReadLine());
 
-
+    //key = český výraz, value = anglický výraz 
     switch (volba)
     {
         case 0:
             File.WriteAllText(cesta, "");
             foreach (var polozka in slovnik)
             {
-                string jedenZaznam = polozka.Value + "="+ polozka.Key + ";";
+                string jedenZaznam = polozka.Key + "="+ polozka.Value + ";";
                 File.AppendAllText(cesta, jedenZaznam);
-                //toto funguje v pořádku, do souboru bylo zapsáno
+
             }
             jeKonec = true;
             break;
@@ -78,7 +78,8 @@ while (!jeKonec)
                 break;
             }
         case 2:
-           foreach (KeyValuePair<string, string> kontakt in slovnik)
+            Console.WriteLine("Česky\tAnglicky");
+            foreach (KeyValuePair<string, string> kontakt in slovnik)
             {
                 Console.WriteLine($"{kontakt.Key}\t{kontakt.Value}");
             }
@@ -87,10 +88,10 @@ while (!jeKonec)
             {
                 Console.WriteLine("Zadej počátek hledaného českého výrazu:");
                 string pocatek = Console.ReadLine();
-                var jmeno = slovnik.Where(x => x.Key.StartsWith(pocatek)).Select(z => z.Value).ToList();
+                var jmeno = slovnik.Where(x => x.Key.StartsWith(pocatek)).Select(z => z).ToList();
                 foreach (var jm in jmeno)
                 {
-                    Console.WriteLine(jm);
+                    Console.WriteLine(jm.Key + " " + jm.Value);
                 }
             }
             break;
@@ -98,10 +99,10 @@ while (!jeKonec)
             {
                 Console.WriteLine("Zadej počátek hledaného hesla v angličtině:");
                 string pocatek = Console.ReadLine();
-                var jmeno = slovnik.Where(x => x.Value.StartsWith(pocatek)).Select(z => z.Key).ToList();
+                var jmeno = slovnik.Where(x => x.Value.StartsWith(pocatek)).Select(z => z).ToList();
                 foreach (var jm in jmeno)
                 {
-                    Console.WriteLine(jm);
+                    Console.WriteLine(jm.Value + " " + jm.Key);
                 }
             }
             break;
