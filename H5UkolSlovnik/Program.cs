@@ -2,6 +2,7 @@
 
 string cesta = @"e:\\text\\czechitas\\slovnik.txt";
 
+//kontroluji jestli soubor vůbec je
 if (File.Exists(cesta))
 {
     Console.WriteLine("Soubor existuje.");
@@ -15,6 +16,7 @@ else
 string[] radky = File.ReadAllLines(cesta);
 string celyText;
 
+//kontrola zda je v souboru vůbec něco, pokud není, necháváme jej prázdný, ale informujeme uživatele
 if (radky.Length > 0)
 {
     celyText = File.ReadAllText(cesta);
@@ -55,6 +57,7 @@ while (!jeKonec)
             {
                 string jedenZaznam = polozka.Value + "="+ polozka.Key + ";";
                 File.AppendAllText(cesta, jedenZaznam);
+                //toto funguje v pořádku, do souboru bylo zapsáno
             }
             jeKonec = true;
             break;
