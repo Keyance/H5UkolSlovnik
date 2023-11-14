@@ -1,6 +1,6 @@
 ﻿var slovnik = new Dictionary<string, string>();
 
-string cesta = @"e:\\text\\czechitas\\slovnik.txt";
+string cesta = @"e:\text\czechitas\slovnik.txt";
 
 //kontroluji jestli soubor vůbec je
 if (File.Exists(cesta))
@@ -25,8 +25,11 @@ if (radky.Length > 0)
 
     foreach (string par in pary)
     {
-        string[]jednotlive = par.Split("=");
-        slovnik.Add(jednotlive[0], jednotlive[1]); //index out of range???
+        string  [] jednotlive = par.Split("=");
+        if (jednotlive[0] != null && jednotlive[1] != null)
+        {
+            slovnik.Add(jednotlive[0], jednotlive[1]); //index out of range???
+        }
     }
 }
 
